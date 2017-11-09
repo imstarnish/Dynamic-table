@@ -1,0 +1,226 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Anish">  
+    <title>Dynamic Table</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">  
+    <link rel="stylesheet" type="text/css" href="table.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">      
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    </head>
+  <body oncontextmenu="return false">  
+      <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
+      <button class="navbar-toggler navbar-toggler-right hidden-lg-up" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <a class="navbar-brand" href="#">Dynamic Table</a>
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <nav class="col-sm-3 col-md-2 hidden-xs-down bg-faded sidebar" style="display:block;">
+          <ul class="nav nav-pills flex-column">
+            <li class="nav-item">
+              <a class="nav-link active cha" href="#">Table</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link cha" href="#"></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link cha" href="#"></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">More fields to add</a>
+            </li>
+          </ul>
+        </nav>
+        <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3" id="mainp">
+          <h1></h1>
+          <h4></h4>
+         <form>    
+          <section class="row text-center placeholders">
+                <div class="col-6">
+                    <input type="text" placeholder="Enter Name" class="inputdata form-control" id="pn">
+                    <input type="text" placeholder="Enter Batch" class="inputdata form-control" id="ref">
+                </div>
+                <div class="col-6">
+                    <input type="text" placeholder="Enter Subject" class="inputdata form-control" id="cdn">
+                    <input type="number" placeholder="Enter Roll no" class="inputdata form-control" id="wn">
+                </div>
+                <div class="col-2">
+                    <label for="DOA" class="">Enter DOB</label>
+                </div>
+                <div class="col-4">
+                    <input type="date" class="inputdata form-control" id="DOA">
+                </div>
+                <div class="col-2">
+                    <label for="TDOA">Enter Time</label>
+                </div>
+                <div class="col-4">
+                    <input type="time" class="inputdata form-control" id="TDOA">
+                </div>
+              <button type="button" onclick="add1()" class="btn btn-block btn-primary">Add</button>
+          </section>
+            </form>
+            <script>
+function add1() {
+    var pn=document.getElementById("pn").value;
+    var dn=document.getElementById("cdn").value;
+    var ref=document.getElementById("ref").value;
+    var wn=document.getElementById("wn").value;
+    var doa = document.getElementById("DOA").value;
+    var tdoa = document.getElementById("TDOA").value;
+    var table = document.getElementById("ptable").rows.length;
+    var i1=table-1;
+    var row="";
+    if(pn=="" || dn=="" || doa=="")
+    {    
+    var x = document.getElementById("snackbar");
+    x.innerHTML="Please fill required fields";    
+    x.className = "show";    
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+    }
+    else
+    {
+    row+='<tr><td contenteditable="true">' + i1 + '</td><td contenteditable="true">' + pn + '</td><td contenteditable="true">' + dn + '</td><td contenteditable="true">' + ref + '</td><td contenteditable="true">' + wn + '</td><td contenteditable="true">' + doa + '</td><td contenteditable="true">' + tdoa + '</td><td class="remove"><button class="btn btn-block btn-danger btn-circle" onclick="deleteRow(this)"><i class="fa fa-close"></i></button></td></tr>';
+    $(row).appendTo("#ptable tbody");
+    var x = document.getElementById("snackbar");
+    x.innerHTML="Row inserted";
+    x.className = "show";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+    document.getElementById("pn").value="";
+    document.getElementById("cdn").value="";
+    document.getElementById("ref").value="";
+    document.getElementById("wn").value="";
+    document.getElementById("DOA").value="";
+    document.getElementById("TDOA").value="";
+    }
+}
+</script>
+          <hr>
+          <h2>Student List</h2>
+          <div class="table-responsive"> 
+            <div class="form-group pull-right">
+            <input type="text" class="search form-control" onkeyup="s()" placeholder="Search student...">
+            </div>
+            <span class="counter pull-right"></span>
+            <table class="table table-hover table-bordered results" id="ptable">  
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Name</th>
+                  <th>Batch</th>
+                  <th>Roll No.</th>
+                  <th>Subject</th>
+                  <th>DOB</th>
+                  <th>Time</th>
+                  <th>Remove</th>    
+                </tr>
+                <tr class="warning no-result">
+                  <td colspan="10"><i class="fa fa-warning"></i> No Matching Records Found</td>
+                </tr>  
+              </thead>
+              <tbody>
+                <tr>
+                  <td scope="row">1</td>
+                  <td contenteditable="true">Rudra</td>
+                  <td contenteditable="true">B1</td>
+                  <td contenteditable="true">Maths</td>
+                  <td contenteditable="true">15</td>
+                  <td contenteditable="true">10-09-1997</td>
+                  <td contenteditable="true">13:20</td>
+                  <td class="remove"><button class="btn btn-block btn-danger btn-circle" onclick="deleteRow(this)"><i class="fa fa-close"></i></button></td>    
+                </tr>
+                <tr>
+                  <td scope="row">2</td>
+                  <td contenteditable="true">Amey</td>
+                  <td contenteditable="true">A1</td>
+                  <td contenteditable="true">Science</td>
+                  <td contenteditable="true">11</td>
+                  <td contenteditable="true">11-9-1998</td>
+                  <td contenteditable="true">11:20</td>
+                  <td class="remove"><button class="btn btn-block btn-danger btn-circle" onclick="deleteRow(this)"><i class="fa fa-close"></i></button></td>
+                </tr>
+                <tr>
+                  <td scope="row">3</td>
+                  <td contenteditable="true">Thorn</td>
+                  <td contenteditable="true">D3</td>
+                  <td contenteditable="true">Geography</td>
+                  <td contenteditable="true">22</td>
+                  <td contenteditable="true">31-10-1999</td>
+                  <td contenteditable="true">19:30</td>
+                  <td class="remove"><button class="btn btn-block btn-danger btn-circle" onclick="deleteRow(this)"><i class="fa fa-close"></i></button></td>
+                </tr>
+                <tr>
+                  <td scope="row">4</td>
+                  <td contenteditable="true">Ria</td>
+                  <td contenteditable="true">D2</td>
+                  <td contenteditable="true">History</td>
+                  <td contenteditable="true">17</td>
+                  <td contenteditable="true">10-10-2017</td>
+                  <td contenteditable="true">10:10</td>
+                  <td class="remove"><button class="btn btn-block btn-danger btn-circle" onclick="deleteRow(this)"><i class="fa fa-close"></i></button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        <div id="snackbar"></div>    
+        </main>
+      </div>
+    </div>
+      <script>
+          function s(){
+              $(".search").keyup(function () {
+                var searchTerm = $(".search").val();
+                var listItem = $('.results tbody').children('tr');
+                var searchSplit = searchTerm.replace(/ /g, "'):containsi('")
+
+              $.extend($.expr[':'], {'containsi': function(elem, i, match, array){
+                    return (elem.textContent || elem.innerText || '').toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
+                }
+              });
+
+              $(".results tbody tr").not(":containsi('" + searchSplit + "')").each(function(e){
+                $(this).attr('visible','false');
+              });
+
+              $(".results tbody tr:containsi('" + searchSplit + "')").each(function(e){
+                $(this).attr('visible','true');
+              });
+
+              var jobCount = $('.results tbody tr[visible="true"]').length;
+                $('.counter').text(jobCount + ' item');
+
+              if(jobCount == '0') {$('.no-result').show();}
+                else {$('.no-result').hide();}
+                      });
+          }
+          
+          
+          function deleteRow(btn) {
+          var row1 = btn.parentNode.parentNode;
+          row1.parentNode.removeChild(row1);
+        }
+      </script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+    <script>$(document).ready(function() {
+				$(window).fadeThis({
+				});
+			});</script>
+    <script
+  src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+  integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+  crossorigin="anonymous"></script>
+    </body>
+</html>
