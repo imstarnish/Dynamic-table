@@ -91,7 +91,7 @@ function add1() {
     }
     else
     {
-    row+='<tr><td contenteditable="true">' + i1 + '</td><td contenteditable="true">' + pn + '</td><td contenteditable="true">' + dn + '</td><td contenteditable="true">' + ref + '</td><td contenteditable="true">' + wn + '</td><td contenteditable="true">' + doa + '</td><td contenteditable="true">' + tdoa + '</td><td class="remove"><button class="btn btn-block btn-danger btn-circle" onclick="deleteRow(this)"><i class="fa fa-close"></i></button></td></tr>';
+    row+='<tr><td contenteditable="true">' + i1 + '</td><td contenteditable="true">' + pn + '</td><td contenteditable="true">' + ref + '</td><td contenteditable="true">' + dn + '</td><td contenteditable="true">' + wn + '</td><td contenteditable="true">' + doa + '</td><td contenteditable="true">' + tdoa + '</td><td class="remove"><button class="btn btn-block btn-danger btn-circle" onclick="deleteRow(this)"><i class="fa fa-close"></i></button></td></tr>';
     $(row).appendTo("#ptable tbody");
     var x = document.getElementById("snackbar");
     x.innerHTML="Row inserted";
